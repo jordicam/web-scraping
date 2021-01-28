@@ -16,18 +16,25 @@ def leer_inputs():
 
 def main(enlace, nimg):
     #selenium
+    imagenes_desc = []
     r = requests.get(enlace)
     soup = BeautifulSoup(r.text, 'lxml')
     myimg = soup.findAll("img")
     for link in myimg[0:nimg]:
         print(link)
-        descargarimagen(link)
+        name_imagen_desc = descargarimagen(link)
+        imagenes_desc.append(name_imagen_desc)
+    return imagenes_desc
 
 def descargarimagen(link):
     lnk = link.get('src')
     lnk= "https:" + lnk
-    with open(basename(lnk), "wb") as f:
+    name_imagen_des = basename(lnk)
+    with open(name_imagen_des, "wb") as f:
         f.write(requests.get(lnk).content)
+    return name_imagen_des
+    
+    
 
 
 
