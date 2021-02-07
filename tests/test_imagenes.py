@@ -1,4 +1,4 @@
-from webscraping.main import descargarimagen, downloadimages_url
+from webscraping.main import descargarimagen, downloadinfo_url
 from bs4 import BeautifulSoup
 import requests
 import os
@@ -20,7 +20,7 @@ def test_main():
         os.remove(png)
     enlace = "https://es.wikipedia.org/wiki/Anexo:Municipios_de_Espa%C3%B1a_por_poblaci%C3%B3n"
     nimg = 4
-    imagenes_desc = downloadimages_url(enlace,nimg)
+    imagenes_desc = downloadinfo_url(enlace,nimg)
     for img in imagenes_desc:
         assert os.path.exists(img) == True
     assert len(imagenes_desc) == nimg

@@ -17,10 +17,17 @@ def downloadimages(soup, nimg=-1):
         imagenes_desc.append(name_imagen_desc)
     return imagenes_desc
 
+def downloadparrafos(soup):
+    parrafos = soup.findAll("p")
+    textoparrafo = []
+    for parrafo in parrafos:
+        textoparrafo.append(parrafo.text)
+    return textoparrafo
 
-def downloadimages_url(enlace,nimg):
+def downloadinfo_url(enlace,nimg):
     soup = get_html(enlace)
     imagenes_desc = downloadimages(soup, nimg)
+    parrafos = downloadparrafos(soup)
     return imagenes_desc
 
 
