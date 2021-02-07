@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from os.path  import basename
+import io
 
 
 def get_html(enlace):
@@ -22,6 +23,7 @@ def downloadparrafos(soup):
     textoparrafo = []
     for parrafo in parrafos:
         textoparrafo.append(parrafo.text)
+    descargartexto(textoparrafo)
     return textoparrafo
 
 def downloadinfo_url(enlace,nimg):
@@ -30,7 +32,11 @@ def downloadinfo_url(enlace,nimg):
     parrafos = downloadparrafos(soup)
     return imagenes_desc
 
-
+def descargartexto(textoparrafo):
+    with io.open("Output.txt", "w", encoding="utf-8") as text_file:
+        str1 = ''.join(textoparrafo)
+        print(str1)
+        text_file.write(str1)
 
 
 def descargarimagen(link):
