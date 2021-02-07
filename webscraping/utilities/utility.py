@@ -35,7 +35,6 @@ def downloadinfo_url(enlace,nimg):
 def descargartexto(textoparrafo):
     with io.open("Output.txt", "w", encoding="utf-8") as text_file:
         str1 = ''.join(textoparrafo)
-        print(str1)
         text_file.write(str1)
 
 
