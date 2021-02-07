@@ -1,6 +1,6 @@
 ####IMPORTS### RELATIVE IMPORTS / ABSOLUTE IMPORTS
 import argparse
-from webscraping.utilities.utility import get_html, downloadimages, downloadimages_url, descargarimagen
+from webscraping.utilities.utility import get_html, downloadimages, downloadinfo_url, descargarimagen
 
 def leer_inputs():
     parser = argparse.ArgumentParser(description='Descarga todas las imagnes de tu url preferida!')
@@ -13,8 +13,7 @@ def leer_inputs():
 
 def main():
     enlace, nimg = leer_inputs()
-    downloadimages_url(enlace, nimg)    
-    
+    downloadinfo_url(enlace, nimg) 
 
 
 
