@@ -1,10 +1,6 @@
-####IMPORTS
-import requests
-from bs4 import BeautifulSoup
-import pandas as pd
-from os.path  import basename
+####IMPORTS### RELATIVE IMPORTS / ABSOLUTE IMPORTS
 import argparse
-
+from webscraping.utilities.utility import get_html, downloadimages, downloadimages_url, descargarimagen
 
 def leer_inputs():
     parser = argparse.ArgumentParser(description='Descarga todas las imagnes de tu url preferida!')
@@ -13,42 +9,15 @@ def leer_inputs():
     args = parser.parse_args()
     return args.url, args.nimg
 
-def get_html(enlace):
-    r = requests.get(enlace)
-    soup = BeautifulSoup(r.text, 'lxml')
-    return soup
-
-def downloadimages(soup, nimg=-1):
-    imagenes_desc = []
-    myimg = soup.findAll("img")
-    for link in myimg[0:nimg]:
-        name_imagen_desc = descargarimagen(link)
-        imagenes_desc.append(name_imagen_desc)
-    return imagenes_desc
 
 
-def main(enlace,nimg):
-    soup = get_html(enlace)
-    imagenes_desc = downloadimages(soup, nimg)
-    return imagenes_desc
-
-
-
-
-def descargarimagen(link):
-    lnk = link.get('src')
-    lnk= "https:" + lnk
-    name_imagen_des = basename(lnk)
-    with open(name_imagen_des, "wb") as f:
-        f.write(requests.get(lnk).content)
-    return name_imagen_des
-    
+def main():
+    enlace, nimg = leer_inputs()
+    downloadimages_url(enlace, nimg)    
     
 
 
 
 ####EJECUCION
 if __name__ == "__main__":
-    ##INPUT SIEMPRE SACA UNA STRING
-    enlace, nimg = leer_inputs()
-    main(enlace, nimg)
+    main()
