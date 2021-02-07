@@ -13,18 +13,27 @@ def leer_inputs():
     args = parser.parse_args()
     return args.url, args.nimg
 
-
-def main(enlace, nimg):
-    #selenium
-    imagenes_desc = []
+def get_html(enlace):
     r = requests.get(enlace)
     soup = BeautifulSoup(r.text, 'lxml')
+    return soup
+
+def downloadimages(soup, nimg=-1):
+    imagenes_desc = []
     myimg = soup.findAll("img")
     for link in myimg[0:nimg]:
-        print(link)
         name_imagen_desc = descargarimagen(link)
         imagenes_desc.append(name_imagen_desc)
     return imagenes_desc
+
+
+def main(enlace,nimg):
+    soup = get_html(enlace)
+    imagenes_desc = downloadimages(soup, nimg)
+    return imagenes_desc
+
+
+
 
 def descargarimagen(link):
     lnk = link.get('src')
